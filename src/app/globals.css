@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #f6f1e8;
+  --cream-deep: #ece4d4;
+  --ink: #1a1410;
+  --muted: #6b6258;
+  --maroon: #8f0d2e;
+  --gold: #b89552;
+  --white: #fffcf7;
+}
+
+@theme inline {
+  --color-cream: var(--cream);
+  --color-cream-deep: var(--cream-deep);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-maroon: var(--maroon);
+  --color-gold: var(--gold);
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.font-serif {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker-track {
+  animation: ticker 28s linear infinite;
+}
+
+@keyframes insta-slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.insta-track {
+  animation: insta-slide 42s linear infinite;
+}
+
+.insta-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track,
+  .insta-track {
+    animation: none;
+  }
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--maroon);
+  outline-offset: 2px;
+}
