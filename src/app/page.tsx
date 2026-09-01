@@ -12,7 +12,7 @@ export default function HomePage() {
               India · Food ingredients · B2B
             </p>
             <h1 className="mt-4 font-serif text-5xl leading-[1.1] md:text-6xl">
-              Premium TRUEFINE dehydrated ingredients
+              Premium TRUEFINE dehydrated products
             </h1>
             <p className="mt-5 max-w-md text-lg text-muted">
               Carefully sourced Indian produce, processed into dependable

@@ -19,7 +19,7 @@ const sans = Outfit({
 
 export const metadata: Metadata = {
   title: {
-    default: "TRUEFINE FOODS — Dehydrated Ingredients from India",
+    default: "TRUEFINE FOODS — Dehydrated Products from India",
     template: "%s | TRUEFINE FOODS",
   },
   description:

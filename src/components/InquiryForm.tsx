@@ -9,6 +9,10 @@ export function InquiryForm() {
   const [done, setDone] = useState(false);
   const preset =
     products.find((item) => item.slug === params.get("product"))?.name ?? "";
+  const wantsSpec = params.get("intent") === "specification";
+  const presetMessage = wantsSpec && preset
+    ? `Please share the specification sheet for ${preset}.`
+    : "";
 
   if (done) {
     return (
@@ -54,7 +58,12 @@ export function InquiryForm() {
       </label>
       <label className="text-sm">
         Message
-        <textarea name="message" rows={4} className="mt-1 w-full border border-ink/15 px-3 py-2" />
+        <textarea
+          name="message"
+          rows={4}
+          defaultValue={presetMessage}
+          className="mt-1 w-full border border-ink/15 px-3 py-2"
+        />
       </label>
       <button
         type="submit"
