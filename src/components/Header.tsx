@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, ShoppingBag, X } from "lucide-react";
+import { useCart } from "@/components/CartProvider";
 
 const links = [
   { href: "/", label: "Home" },
@@ -14,6 +15,7 @@ const links = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const { count } = useCart();
 
   useEffect(() => {
     if (!open) return;
@@ -53,12 +55,26 @@ export function Header() {
               </Link>
             ))}
           </nav>
-          <Link
-            href="/inquire"
-            className="hidden bg-maroon px-5 py-2.5 text-[12px] tracking-[0.14em] uppercase text-white md:inline-flex"
-          >
-            Request a Quote
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/cart"
+              aria-label={count ? `Cart, ${count} items` : "Cart"}
+              className="relative inline-flex h-10 w-10 items-center justify-center border border-ink/15"
+            >
+              <ShoppingBag size={18} />
+              {count > 0 ? (
+                <span className="absolute -top-2 -right-2 flex h-5 min-w-5 items-center justify-center bg-maroon px-1 text-[10px] text-white">
+                  {count}
+                </span>
+              ) : null}
+            </Link>
+            <Link
+              href="/inquire"
+              className="hidden bg-maroon px-5 py-2.5 text-[12px] tracking-[0.14em] uppercase text-white md:inline-flex"
+            >
+              Request a Quote
+            </Link>
+          </div>
           <button
             type="button"
             className="inline-flex h-10 w-10 items-center justify-center border border-ink/15 md:hidden"
@@ -113,6 +129,13 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
+            <Link
+              href="/cart"
+              onClick={() => setOpen(false)}
+              className="border-b border-ink/10 py-4 font-serif text-3xl"
+            >
+              Cart{count > 0 ? ` (${count})` : ""}
+            </Link>
             <Link
               href="/inquire"
               onClick={() => setOpen(false)}

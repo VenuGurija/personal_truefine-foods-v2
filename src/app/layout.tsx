@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Outfit } from "next/font/google";
+import { CartProvider } from "@/components/CartProvider";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Ticker } from "@/components/Ticker";
@@ -34,11 +35,13 @@ export default function RootLayout({
   return (
     <html lang="en-IN">
       <body className={`${serif.variable} ${sans.variable} font-sans antialiased`}>
-        <Ticker />
-        <Header />
-        <main className="pb-20 md:pb-0">{children}</main>
-        <Footer />
-        <WhatsAppDock />
+        <CartProvider>
+          <Ticker />
+          <Header />
+          <main className="pb-20 md:pb-0">{children}</main>
+          <Footer />
+          <WhatsAppDock />
+        </CartProvider>
       </body>
     </html>
   );

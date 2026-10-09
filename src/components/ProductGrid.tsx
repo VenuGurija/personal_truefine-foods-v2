@@ -3,7 +3,9 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { AddToCartButton } from "@/components/BuyBox";
 import { products, type Category } from "@/data/site";
+import { formatINR } from "@/lib/order";
 
 const filters: { label: string; value: "all" | Category }[] = [
   { label: "All", value: "all" },
@@ -50,35 +52,59 @@ export function ProductGrid({ variant = "all" }: { variant?: "all" | "best" }) {
         </div>
       )}
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {list.map((product) => (
-          <Link
-            key={product.slug}
-            href={`/products/${product.slug}`}
-            className="group border border-ink/10 bg-white"
-          >
-            <div
-              className="relative aspect-[4/5] overflow-hidden"
-              style={{ backgroundColor: product.accent }}
-            >
-              {product.image ? (
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  className="object-cover transition duration-500 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
+        {list.map((product) => {
+          const pack = product.packs?.[0];
+          return (
+            <article key={product.slug} className="flex flex-col border border-ink/10 bg-white">
+              <Link href={`/products/${product.slug}`} className="group block flex-1">
+                <div
+                  className="relative aspect-[4/5] overflow-hidden"
+                  style={{ backgroundColor: product.accent }}
+                >
+                  {product.image ? (
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover transition duration-500 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  ) : null}
+                </div>
+                <div className="p-5">
+                  <p className="text-[11px] tracking-[0.14em] uppercase text-muted">
+                    {pack
+                      ? `${pack.size} · ${formatINR(pack.price)}`
+                      : product.available
+                        ? "In range"
+                        : "On request"}
+                  </p>
+                  <h3 className="mt-1 font-serif text-2xl">{product.name}</h3>
+                  <p className="mt-2 text-sm text-muted">{product.description}</p>
+                  {product.packs && product.packs.length > 1 ? (
+                    <p className="mt-2 text-sm text-muted">
+                      Also{" "}
+                      {product.packs
+                        .slice(1)
+                        .map((item) => `${item.size} ${formatINR(item.price)}`)
+                        .join(", ")}
+                    </p>
+                  ) : null}
+                </div>
+              </Link>
+              {pack ? (
+                <div className="px-5 pb-5">
+                  <AddToCartButton
+                    slug={product.slug}
+                    packSize={pack.size}
+                    label={`Add ${pack.size}`}
+                    className="w-full bg-maroon px-4 py-3 text-[12px] tracking-[0.12em] uppercase text-white"
+                  />
+                </div>
               ) : null}
-            </div>
-            <div className="p-5">
-              <p className="text-[11px] tracking-[0.14em] uppercase text-muted">
-                {product.available ? "In range" : "On request"}
-              </p>
-              <h3 className="mt-1 font-serif text-2xl">{product.name}</h3>
-              <p className="mt-2 text-sm text-muted">{product.description}</p>
-            </div>
-          </Link>
-        ))}
+            </article>
+          );
+        })}
       </div>
       {featured ? (
         <div className="mt-10 text-center">

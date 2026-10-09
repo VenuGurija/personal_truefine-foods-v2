@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { BuyBox } from "@/components/BuyBox";
 import {
   categoryLabels,
   contact,
@@ -71,10 +72,15 @@ export default async function ProductPage({
           <h1 className="mt-3 font-serif text-5xl">{product.name}</h1>
           <p className="mt-5 text-lg text-muted">{product.detail}</p>
           <p className="mt-4 text-sm text-muted">
-            {product.available
-              ? "This product is part of the current TRUEFINE range. Commercial confirmation is made against each inquiry."
-              : "This product is listed for inquiry. Availability is confirmed against your requirement."}
+            {product.packs?.length
+              ? "Order a retail pack here. Bulk quantities and specifications are confirmed on inquiry."
+              : product.available
+                ? "This product is part of the current TRUEFINE range. Commercial confirmation is made against each inquiry."
+                : "This product is listed for inquiry. Availability is confirmed against your requirement."}
           </p>
+          {product.packs?.length ? (
+            <BuyBox slug={product.slug} packs={product.packs} />
+          ) : null}
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href={`/inquire?product=${product.slug}`}

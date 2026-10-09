@@ -27,10 +27,10 @@ export default function HomePage() {
                 Why TRUEFINE
               </Link>
               <Link
-                href="#best-products"
+                href="/products"
                 className="border border-ink/20 px-6 py-3 text-[12px] tracking-[0.14em] uppercase"
               >
-                Our products
+                Shop powders
               </Link>
             </div>
           </div>
@@ -61,11 +61,11 @@ export default function HomePage() {
               },
               {
                 title: "Thoughtfully processed",
-                text: "Dehydrated and milled for food manufacture — not a retail gimmick.",
+                text: "Dehydrated and milled so the powder stays consistent in the kitchen and in production.",
               },
               {
-                title: "Built for businesses",
-                text: "Samples, specifications and commercial quantities on inquiry.",
+                title: "Retail packs and bulk",
+                text: "Order a jar online, or inquire when you need commercial quantities.",
               },
             ].map((item) => (
               <article key={item.title} className="border-t border-gold pt-6">

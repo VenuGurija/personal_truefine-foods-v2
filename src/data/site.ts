@@ -1,5 +1,10 @@
 export type Category = "vegetable" | "fruit" | "botanical";
 
+export type Pack = {
+  size: string;
+  price: number;
+};
+
 export type Product = {
   slug: string;
   name: string;
@@ -15,6 +20,7 @@ export type Product = {
   applications: string[];
   packSize: string;
   moq: string;
+  packs?: Pack[];
 };
 
 export const categoryLabels: Record<Category, string> = {
@@ -65,8 +71,12 @@ export const products: Product[] = [
     form: "Dehydrated powder",
     origin: "India",
     applications: ["Beverages", "Soups & sauces", "Bakery"],
-    packSize: "25kg pack; bulk formats available on request",
-    moq: "Available on request",
+    packSize: "100g and 150g retail packs; bulk formats available on request",
+    moq: "1 retail pack; bulk on request",
+    packs: [
+      { size: "100g", price: 249 },
+      { size: "150g", price: 238 },
+    ],
   },
   {
     slug: "banana-powder",
@@ -84,6 +94,26 @@ export const products: Product[] = [
     applications: ["Beverages", "Bakery", "Formulations"],
     packSize: "25kg pack; bulk formats available on request",
     moq: "Available on request",
+  },
+  {
+    slug: "amla-powder",
+    name: "Amla Powder",
+    category: "fruit",
+    description: "Dehydrated amla for food and beverage use.",
+    detail:
+      "TRUEFINE amla powder is produced from dehydrated amla and prepared as a convenient product for food and beverage use. It is a formulation ingredient, not a medicinal product.",
+    accent: "#C6B15A",
+    available: true,
+    botanicalName: "Phyllanthus emblica",
+    form: "Dehydrated powder",
+    origin: "India",
+    applications: ["Beverages", "Food", "Formulations"],
+    packSize: "100g and 150g retail packs; bulk formats available on request",
+    moq: "1 retail pack; bulk on request",
+    packs: [
+      { size: "100g", price: 299 },
+      { size: "150g", price: 213 },
+    ],
   },
   {
     slug: "onion-powder",
@@ -111,13 +141,17 @@ export const products: Product[] = [
       "Carrot powder is offered as a dehydrated vegetable product for food businesses that require a stable carrot format. Availability, mesh and packaging can be discussed against your specification.",
     image: "/images/products/carrot-powder.jpg",
     accent: "#C45C26",
-    available: false,
+    available: true,
     botanicalName: "Daucus carota",
     form: "Dehydrated powder",
     origin: "India",
     applications: ["Food & beverage", "Seasoning", "Formulations"],
-    packSize: "Available on request",
-    moq: "Available on request",
+    packSize: "100g and 150g retail packs; bulk formats available on request",
+    moq: "1 retail pack; bulk on request",
+    packs: [
+      { size: "100g", price: 249 },
+      { size: "150g", price: 204 },
+    ],
   },
   {
     slug: "moringa-leaf-powder",
@@ -128,13 +162,17 @@ export const products: Product[] = [
       "TRUEFINE moringa leaf powder is a plant-based product for food and beverage applications. It is intended as a formulation input, not as a medicinal product. Specifications are shared on request.",
     image: "/images/products/moringa-leaf-powder.jpg",
     accent: "#2D5A27",
-    available: false,
+    available: true,
     botanicalName: "Moringa oleifera",
     form: "Dehydrated leaf powder",
     origin: "India",
     applications: ["Food & beverage", "Seasoning", "Formulations"],
-    packSize: "Available on request",
-    moq: "Available on request",
+    packSize: "100g and 150g retail packs; bulk formats available on request",
+    moq: "1 retail pack; bulk on request",
+    packs: [
+      { size: "100g", price: 249 },
+      { size: "150g", price: 229 },
+    ],
   },
 ];
 
@@ -161,4 +199,12 @@ export const contact = {
   whatsapp: "919676949495",
   instagram: "trufinefoods",
   address: "8-86/1 Indira Nagar, Chityala, Nalgonda - 508114, Telangana, India",
+};
+
+export const shop = {
+  discountCode: "BUY3GET8%",
+  discountMinQty: 3,
+  discountRate: 0.08,
+  shippingFee: 130,
+  freeShippingSubtotal: 1000,
 };
